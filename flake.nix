@@ -22,7 +22,7 @@
       inherit (poetry2nix.lib.mkPoetry2Nix {inherit pkgs;}) mkPoetryApplication;
     in {
       packages = {
-        myapp = mkPoetryApplication {
+        krr = mkPoetryApplication {
           projectDir = pkgs.fetchFromGitHub {
             owner = "robusta-dev";
             repo = "krr";
@@ -32,11 +32,11 @@
 
           preferWheels = true;
         };
-        default = self.packages.${system}.myapp;
+        default = self.packages.${system}.krr;
       };
 
       devShells.default = pkgs.mkShell {
-        inputsFrom = [self.packages.${system}.myapp];
+        inputsFrom = [self.packages.${system}.krr];
         packages = [pkgs.poetry];
       };
     });
